@@ -10,7 +10,7 @@
  */
 function strip_utf8mb4_menu() {
   $items = array();
-  $items['admin/config/content/text-reject-none-utf8'] = array(
+  $items['admin/config/content/strip_utf8mb4'] = array(
     'type' => MENU_NORMAL_ITEM,
     'title' => 'Strip 4-byte UTF8',
     'description' => t('Configure text fields to reject overly long 2 byte sequences, as well as characters above U+10000, reject overly long 3 byte sequences and UTF-16.'),

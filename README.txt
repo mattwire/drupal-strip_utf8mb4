@@ -1,4 +1,5 @@
 Strip 4-byte UTF8
+-----------------------------------------------
 
 This module helps in preventing PDO exceptions caused by MySQL general error of Incorrect string value, Enabling this module will have your site reject overly long 2 byte sequences, as well as characters above U+10000, and reject overly long 3 byte sequences and UTF-16.
 

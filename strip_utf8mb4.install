@@ -9,7 +9,7 @@
  * Implements hook_uninstall().
  */
 function strip_utf8mb4_uninstall() {
-  // Delete variables.
+  // Delete all String utf8mb4's variables.
   variable_del('strip_utf8mb4_for_text_field_widget_types');
   variable_del('strip_utf8mb4_replace_string');
 

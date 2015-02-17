@@ -20,14 +20,14 @@ function strip_utf8mb4_configuration_form($form, &$form_state) {
   );
   $form['strip_utf8mb4_for_text_field_widget_types'] = array(
     '#type' => 'checkboxes',
-    '#title' => t('Strip 4-byte UTF8 characters for the following text field widget types:'),
+    '#title' => t('Strip 4-byte UTF8 characters for the following text field widget types'),
     '#options' => $text_field_widget_types,
     '#default_value' => variable_get('strip_utf8mb4_for_text_field_widget_types', array_keys($text_field_widget_types)),
   );
   $form['strip_utf8mb4_replace_string'] = array(
     '#type' => 'textfield',
     '#title' => t('Strip 4-byte UTF8 and replace them with this string'),
-    '#description' => t('Change the replace string if you do not want to use  the default -- .'),
+    '#description' => t('Change the replace string if you do not want to use  the default "--" .'),
     '#default_value' => variable_get('strip_utf8mb4_replace_string', '--'),
   );
 
