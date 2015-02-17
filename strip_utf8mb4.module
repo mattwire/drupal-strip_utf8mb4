@@ -46,11 +46,11 @@ function strip_utf8mb4_field_attach_presave($entity_type, $entity) {
       if (is_array($text_field_data) && count($text_field_data)) {
 
         // Reject not utf8 strings for the field value.
-        $text_field_data['value'] = _strip_utf8mb4_for_text_fields($text_field_data['value']);
+        $text_field_data['value'] = _strip_utf8mb4_for_text_fields($text_field_data['value'], variable_get('strip_utf8mb4_replace_string', '--'));
 
         // Reject not utf8 strings for the field summary if we do have.
         if (isset($text_field_data['summary'])) {
-          $text_field_data['summary'] = _strip_utf8mb4_for_text_fields($text_field_data['summary']);
+          $text_field_data['summary'] = _strip_utf8mb4_for_text_fields($text_field_data['summary'], variable_get('strip_utf8mb4_replace_string', '--'));
         }
         
         // Save the filtered field data in the entity object.
@@ -87,7 +87,7 @@ function _strip_utf8mb4_for($field_widget_type) {
  *
  * @return string
  */
-function _strip_utf8mb4_for_text_fields($text_data, $replace_text) {
+function _strip_utf8mb4_for_text_fields($text_data, $replace_text ='') {
   // Strip overly long 2 byte sequences, as well as characters
   //  above U+10000 and replace with $replace_text
   $processed_text_data = preg_replace('/[\x00-\x08\x10\x0B\x0C\x0E-\x19\x7F]' .
