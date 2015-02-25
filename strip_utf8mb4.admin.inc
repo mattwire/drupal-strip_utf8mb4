@@ -13,6 +13,7 @@ function strip_utf8mb4_configuration_form($form, &$form_state) {
     'text_textfield' => t('Text'),
     'text_textarea' => t('Long text'),
     'text_textarea_with_summary' => t('Long text and summary'),
+    'core_title' => t('Core node\'s title'),
   );
   $form['strip_utf8mb4_intro'] = array(
     '#type' => 'markup',
