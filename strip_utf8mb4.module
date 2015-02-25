@@ -42,13 +42,6 @@ function strip_utf8mb4_field_attach_presave($entity_type, $entity) {
       // Get text field values.
       $text_field_data = $entity_wrapper->{$field_name}->value();
 
-
-       if ($field_name == 'title_field') {
-         echo '<pre>';
-         print_r($text_field_data);
-         die(' con');
-       }
-
       // If we do have data in the field.
       if (is_array($text_field_data) && count($text_field_data) > 0) {
 
@@ -58,7 +51,7 @@ function strip_utf8mb4_field_attach_presave($entity_type, $entity) {
         }
         else {
           foreach ($text_field_data as $text_field_data_item_key => $text_field_data_item) {
-            $text_field_data[$text_field_data_item_key] = _strip_utf8mb4_for_text_fields($text_field_data_item,variable_get('strip_utf8mb4_replace_string', '--'));
+            $text_field_data[$text_field_data_item_key] = _strip_utf8mb4_for_text_fields($text_field_data_item, variable_get('strip_utf8mb4_replace_string', '--'));
           }
         }
 
@@ -70,10 +63,12 @@ function strip_utf8mb4_field_attach_presave($entity_type, $entity) {
         // Save the filtered field data in the entity object.
         $entity_wrapper->{$field_name}->set($text_field_data);
       }
-      else {
-         $text_field_data = _strip_utf8mb4_for_text_fields($text_field_data, variable_get('strip_utf8mb4_replace_string', '--'));
+      elseif (is_string($text_field_data) && $text_field_data != '') {
+
+        $text_field_data = _strip_utf8mb4_for_text_fields($text_field_data, variable_get('strip_utf8mb4_replace_string', '--'));
+
         // Save the filtered field data in the entity object.
-        $entity_wrapper->{$field_name}->set($text_field_data);
+        $entity_wrapper->{$field_name} = $text_field_data;
       }
     }
   }
