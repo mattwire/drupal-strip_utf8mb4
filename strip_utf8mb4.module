@@ -73,8 +73,8 @@ function strip_utf8mb4_field_attach_presave($entity_type, $entity) {
     }
   }
 
-  // If we want to strip none utf8 from drupal core node's title.
-  if (_strip_utf8mb4_for('core_title')) {
+  // If we want to strip none utf8 from Drupal core node's title.
+  if (isset($entity->title) && _strip_utf8mb4_for('core_title')) {
     $entity->title = _strip_utf8mb4_for_text_fields($entity->title, variable_get('strip_utf8mb4_replace_string', '--'));
   }
 }
