@@ -28,12 +28,21 @@ function strip_utf8mb4_menu() {
  */
 function strip_utf8mb4_webform_submission_presave($node, &$submission) {
   $components = $node->webform['components'];
-  
+  $webform_info = system_get_info('module', 'webform');
+  $webform_version_parts = explode('-', $webform_info['version']);
+  $webform_version_parts = explode('.', $webform_version_parts[1]);
+  $webform_version = $webform_version_parts[0];
+
   // The submission has no data about the type of the values, so we go through
   // the componen saved in the node.
   foreach ($components as $cid => $component) {
     if (isset($component['type']) && _webform_strip_utf8mb4_for($component['type'])) {
-      $component_value = &$submission->data[$cid]['value'];
+      if ($webform_version >= 4) {
+        $component_value = &$submission->data[$cid];
+      }
+      else {
+        $component_value = &$submission->data[$cid]['value'];
+      }
       if (isset($component_value)) {
         if (is_array($component_value) && count($component_value) > 0) {
           foreach ($component_value as &$value) {
